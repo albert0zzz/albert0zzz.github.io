@@ -1,0 +1,654 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Резюме - Д-р Айво "Эггман" Роботник</title>
+    <style>
+        /* Стили остаются теми же, что и в предыдущем примере. */
+        /* Для краткости я их здесь опущу, но они должны быть тут. */
+        /* Скопируйте CSS из предыдущего ответа. */
+        :root {
+            --primary-color: #f0ad4e; /* Оранжевый Эггмана */
+            --secondary-color: #333333; /* Темно-серый, почти черный */
+            --light-color: #fdf5e6;   /* Очень светлый, кремовый */
+            --dark-color: #222222;    /* Очень темный текст */
+            --background-color: #ffffff; 
+            --border-color: #dee2e6;   
+            --font-main: 'Arial', sans-serif; /* Более "технический" шрифт */
+            --font-headings: 'Impact', Charcoal, sans-serif; /* "Злодейский" шрифт для заголовков */
+            --shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        /* ... (ОСТАЛЬНЫЕ CSS СТИЛИ ИЗ ПРЕДЫДУЩЕГО ОТВЕТА) ... */
+        /* Добавим стиль для фото */
+        .profile-picture-container {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .profile-picture {
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            border: 5px solid var(--primary-color);
+            object-fit: cover; /* Чтобы изображение хорошо вписывалось */
+            box-shadow: 0 0 15px rgba(240, 173, 78, 0.5);
+        }
+
+        /* Сброс стилей и базовые настройки */
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth; /* Плавная прокрутка */
+        }
+
+        body {
+            font-family: var(--font-main);
+            line-height: 1.7;
+            background-color: var(--background-color);
+            color: var(--dark-color);
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        /* Подключение шрифтов Google Fonts (если Impact недоступен локально, можно найти аналог) */
+        /* @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Roboto:wght@400;700&display=swap'); */
+
+        /* Контейнер для центрирования контента */
+        .container {
+            width: 90%;
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 20px 0;
+        }
+
+        /* Стили для шапки */
+        .header {
+            background-color: var(--secondary-color); /* Темный фон для шапки */
+            color: var(--light-color);
+            padding: 40px 20px;
+            text-align: center;
+            border-bottom: 5px solid var(--primary-color); /* Оранжевая граница */
+            box-shadow: var(--shadow);
+        }
+
+        .header h1 {
+            font-family: var(--font-headings);
+            font-size: 3em;
+            margin-bottom: 10px;
+            color: var(--primary-color); /* Оранжевый заголовок */
+            text-shadow: 2px 2px #000;
+        }
+
+        .header .job-title {
+            font-size: 1.6em;
+            font-weight: bold;
+            margin-bottom: 15px;
+            color: #eee;
+        }
+
+        .header .short-bio {
+            font-size: 1.1em;
+            max-width: 750px;
+            margin: 0 auto 25px auto;
+            line-height: 1.6;
+            font-style: italic;
+        }
+
+        /* Кнопки в шапке */
+        .header-buttons .btn {
+            margin: 0 10px;
+        }
+
+        /* Основной контент */
+        .main-content {
+            flex-grow: 1;
+            padding: 40px 0;
+        }
+
+        /* Стили для секций */
+        .resume-section {
+            background-color: var(--light-color);
+            margin-bottom: 40px;
+            padding: 30px;
+            border-radius: 8px; /* Менее скругленные */
+            border: 2px solid var(--border-color);
+            box-shadow: var(--shadow);
+            opacity: 0; 
+            transform: translateY(30px); 
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+
+        .resume-section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .resume-section h2 {
+            font-family: var(--font-headings);
+            font-size: 2.2em;
+            color: var(--secondary-color); /* Темный заголовок секции */
+            margin-bottom: 25px;
+            border-bottom: 3px solid var(--primary-color); /* Оранжевый акцент */
+            padding-bottom: 10px;
+            position: relative;
+            text-align: left;
+        }
+        .resume-section h2::after { 
+            content: '★'; /* Звездочка или другой символ Эггмана */
+            position: absolute;
+            right: 10px;
+            bottom: 5px; 
+            font-size: 1.2em;
+            color: var(--primary-color);
+        }
+
+
+        /* Секция "Опыт работы" */
+        .job-item {
+            margin-bottom: 25px;
+            padding-bottom: 25px;
+            border-bottom: 1px dashed var(--secondary-color);
+        }
+        .job-item:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+        .job-item h3 {
+            font-family: var(--font-main);
+            font-weight: bold;
+            font-size: 1.4em;
+            margin-bottom: 5px;
+            color: var(--primary-color);
+        }
+        .job-item .company-dates {
+            font-size: 0.95em;
+            color: #555;
+            margin-bottom: 10px;
+        }
+        .job-item .company-dates .company {
+            font-weight: bold;
+            color: var(--secondary-color);
+        }
+        .job-item ul {
+            list-style-type: '🤖'; /* Робот вместо маркера */
+            margin-left: 5px;
+            padding-left: 15px;
+            color: #444;
+        }
+        .job-item ul li {
+            margin-bottom: 8px;
+            line-height: 1.5;
+        }
+
+
+        /* Секция "Образование" */
+        .education-item {
+            margin-bottom: 20px;
+        }
+        .education-item h3 {
+            font-family: var(--font-main);
+            font-weight: bold;
+            font-size: 1.3em;
+            margin-bottom: 3px;
+            color: var(--primary-color);
+        }
+        .education-item .institution-years {
+            font-size: 0.9em;
+            color: #555;
+        }
+         .education-item p:not(.institution-years) {
+            margin-top: 5px;
+            color: #444;
+        }
+
+        /* Секция "Навыки" */
+        .skills-list {
+            list-style: none;
+            padding: 0;
+            display: flex; 
+            flex-wrap: wrap; 
+            gap: 10px; 
+        }
+        .skills-list li {
+            background-color: var(--primary-color);
+            color: var(--dark-color); /* Темный текст на оранжевом */
+            padding: 8px 15px;
+            border-radius: 5px; /* Более угловатые */
+            font-size: 1em;
+            font-weight: bold;
+            border: 1px solid var(--secondary-color);
+            box-shadow: 2px 2px 3px rgba(0,0,0,0.1);
+        }
+        .skills-list li.soft-skill {
+            background-color: var(--secondary-color);
+            color: var(--light-color);
+            border-color: var(--primary-color);
+        }
+         .skills-list h3 { /* Заголовок внутри списка навыков */
+            width: 100%;
+            font-size: 1.2em;
+            margin-bottom: 10px;
+            color: var(--secondary-color);
+            font-family: var(--font-main);
+        }
+
+        /* Секция "Контактная форма" */
+        #contact-form label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: #444;
+        }
+        #contact-form input[type="text"],
+        #contact-form input[type="email"],
+        #contact-form textarea {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 20px;
+            border: 2px solid var(--border-color);
+            border-radius: 4px;
+            font-family: var(--font-main);
+            font-size: 1em;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+            background-color: #fff;
+        }
+        #contact-form input[type="text"]:focus,
+        #contact-form input[type="email"]:focus,
+        #contact-form textarea:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 8px rgba(240, 173, 78, 0.4);
+        }
+        #contact-form textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+        .error-message {
+            color: #d9534f; /* Более заметный красный */
+            font-size: 0.9em;
+            margin-top: -15px;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+        .success-message {
+            color: #3c763d; /* Темно-зеленый */
+            font-weight: bold;
+            text-align: center;
+            padding: 10px;
+            background-color: #dff0d8;
+            border: 1px solid #d6e9c6;
+            border-radius: 4px;
+            margin-top: 10px;
+        }
+
+
+        /* Общие стили для кнопок */
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            font-size: 1.1em;
+            font-weight: bold;
+            text-decoration: none;
+            border-radius: 5px; 
+            transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+            border-width: 2px;
+            border-style: solid;
+            box-shadow: 3px 3px 5px rgba(0,0,0,0.2);
+            text-transform: uppercase;
+        }
+        .btn-primary { /* Кнопки в шапке */
+            background-color: var(--primary-color);
+            color: var(--dark-color);
+            border-color: var(--dark-color);
+        }
+        .btn-primary:hover {
+            background-color: #df8931; /* Темнее оранжевый */
+            color: #000;
+            border-color: #000;
+            transform: translateY(-2px) scale(1.05);
+            box-shadow: 4px 4px 8px rgba(0,0,0,0.3);
+        }
+        /* Кнопка "Связаться" может быть другой */
+        .btn-secondary {
+            background-color: var(--secondary-color);
+            color: var(--light-color);
+            border-color: var(--primary-color);
+        }
+        .btn-secondary:hover {
+            background-color: #222;
+            color: var(--primary-color);
+            border-color: var(--primary-color);
+            transform: translateY(-2px) scale(1.05);
+        }
+        #contact-form .btn { /* Кнопка отправки формы */
+            background-color: var(--primary-color);
+            color: var(--dark-color);
+            border-color: var(--secondary-color);
+            width: auto; /* Не на всю ширину */
+            max-width: none;
+            display: inline-block; /* Чтобы не растягивалась */
+            margin-top: 10px;
+        }
+        #contact-form .btn:hover {
+            background-color: #df8931;
+            border-color: #000;
+        }
+
+        /* Подвал */
+        .footer {
+            background-color: var(--secondary-color);
+            color: var(--light-color);
+            text-align: center;
+            padding: 25px;
+            font-size: 0.95em;
+            border-top: 5px solid var(--primary-color);
+        }
+        .footer p {
+            margin: 5px 0;
+        }
+        .footer a {
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+        .footer a:hover {
+            text-decoration: underline;
+        }
+
+
+        /* Адаптивность */
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2.4em;
+            }
+            .header .job-title {
+                font-size: 1.3em;
+            }
+            .header .short-bio {
+                font-size: 1em;
+            }
+            .resume-section h2 {
+                font-size: 1.8em;
+            }
+            .skills-list {
+                justify-content: flex-start; /* Навыки слева */
+            }
+            .header-buttons {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+            }
+            .header-buttons .btn {
+                margin: 10px 0;
+                width: 70%;
+                max-width: 280px;
+            }
+            .profile-picture {
+                width: 150px;
+                height: 150px;
+            }
+        }
+        @media (max-width: 480px) {
+            .container {
+                width: 95%;
+            }
+            .resume-section {
+                padding: 20px 15px;
+            }
+            .header {
+                padding: 30px 10px;
+            }
+             .profile-picture {
+                width: 120px;
+                height: 120px;
+            }
+            .job-item ul {
+                padding-left: 10px; /* Уменьшаем отступ для робота-маркера */
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header class="header">
+        <div class="container">
+            <div class="profile-picture-container">
+                <!-- Замените на реальный URL или путь к изображению Эггмана -->
+                <img src="robotnik_photo.png" alt="Фото Доктора Эггмана" class="profile-picture">
+            </div>
+            <h1>Д-р Айво "Эггман" Роботник</h1>
+            <p class="job-title">Гениальный Ученый, Изобретатель, Потенциальный Властелин Мира</p>
+            <p class="short-bio">
+                "Я — величайший научный гений в мире с IQ 300! Моя цель — построить утопическую Эггманландию (также известную как Империя Эггмана), где все будет подчиняться моим гениальным правилам. Синий ёж постоянно мешает, но он не остановит мой триумф!"
+            </p>
+            <div class="header-buttons">
+                <a href="Eggman_Master_Plan.pdf" download="Эггман_Генеральный_План.pdf" class="btn btn-primary" id="downloadResumeBtn">Скачать Ген. План (PDF)</a>
+                <a href="#contact" class="btn btn-primary" id="contactMeBtn">Предложить сотрудничество</a>
+            </div>
+        </div>
+    </header>
+
+    <main class="main-content">
+        <div class="container">
+
+            <section id="experience" class="resume-section">
+                <h2>Проекты и "Опыт работы"</h2>
+                <div class="job-item">
+                    <h3>Основатель и CEO, Eggman Empire</h3>
+                    <p class="company-dates"><span class="company">Глобальная корпорация (в стадии активного расширения)</span> | Различные локации — Много лет - Настоящее время</p>
+                    <ul>
+                        <li>Проектирование и создание тысяч высокотехнологичных роботов (Бадников) для различных целей.</li>
+                        <li>Разработка и запуск масштабных мегаструктур, таких как "Звезда Смерти" (Death Egg), "Финальная Крепость" и тематических парков.</li>
+                        <li>Многократные попытки захвата Изумрудов Хаоса для питания сверхоружия и реализации глобальных проектов.</li>
+                        <li>Управление огромной армией роботов и флотом летающих крепостей.</li>
+                        <li>Стратегическое планирование операций по нейтрализации назойливых героев.</li>
+                    </ul>
+                </div>
+                <div class="job-item">
+                    <h3>Независимый исследователь и изобретатель</h3>
+                    <p class="company-dates"><span class="company">Собственная лаборатория</span> | Секретные базы — Ранние годы - Много лет</p>
+                    <ul>
+                        <li>Пионерские исследования в области робототехники, искусственного интеллекта и энергетики Хаоса.</li>
+                        <li>Создание инновационных транспортных средств (Эггмобиль, Эгг-Уокеры и др.).</li>
+                        <li>Разработка уникальных систем вооружения и защитных технологий.</li>
+                        <li>Эксперименты по манипуляции пространством-временем (не всегда успешные).</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section id="education" class="resume-section">
+                <h2>Образование и Самообучение</h2>
+                <div class="education-item">
+                    <h3>Докторская степень (самоприсвоенная, но заслуженная!) в Неограниченной Науке</h3>
+                    <p class="institution-years">Университет Гениальности Им. Себя — Непрерывно</p>
+                    <p>Постоянное самосовершенствование и расширение знаний во всех областях науки и техники. Автор многочисленных неопубликованных (из-за козней конкурентов) научных трудов.</p>
+                </div>
+                <div class="education-item">
+                    <h3>Почетный выпускник (в собственных глазах) Академии Злых Гениев</h3>
+                    <p class="institution-years">Тайное Общество — Заочно, с отличием</p>
+                    <p>Специализация: "Глобальное доминирование и эффективное управление миньонами".</p>
+                </div>
+            </section>
+
+            <section id="skills" class="resume-section">
+                <h2>Ключевые Компетенции и Навыки</h2>
+                <h3>Технические Навыки и Изобретения:</h3>
+                <ul class="skills-list">
+                    <li>Робототехника (Проектирование, Сборка)</li>
+                    <li>Искусственный Интеллект (Базовый)</li>
+                    <li>Мехатроника</li>
+                    <li>Лазерные технологии</li>
+                    <li>Энергетика Хаоса (Эксперт)</li>
+                    <li>Проектирование Оружия Массового Поражения</li>
+                    <li>Строительство Мегаструктур</li>
+                    <li>Пилотирование (Эггмобиль и аналоги)</li>
+                    <li>Маскировка и Шпионаж (иногда)</li>
+                    <li>Создание тематических парков</li>
+                </ul>
+                <br>
+                <h3>Личностные Качества и "Мягкие" Навыки:</h3>
+                 <ul class="skills-list">
+                    <li class="soft-skill">Гениальный интеллект (IQ 300)</li>
+                    <li class="soft-skill">Непревзойденная хитрость</li>
+                    <li class="soft-skill">Упорство (несмотря на неудачи)</li>
+                    <li class="soft-skill">Лидерские качества (для роботов)</li>
+                    <li class="soft-skill">Стратегическое мышление</li>
+                    <li class="soft-skill">Креативность (в создании роботов)</li>
+                    <li class="soft-skill">Умение эффектно смеяться (Хо-хо-хо!)</li>
+                    <li class="soft-skill">Склонность к театральности</li>
+                </ul>
+            </section>
+
+            <section id="contact" class="resume-section">
+                <h2>Связаться для Сотрудничества (или Капитуляции)</h2>
+                <form id="contact-form">
+                    <div class="form-group">
+                        <label for="name">Ваше Имя (или Имя Героя):</label>
+                        <input type="text" id="name" name="name" required>
+                        <p class="error-message" id="nameError"></p>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Ваш Email (для отправки условий капитуляции):</label>
+                        <input type="email" id="email" name="email" required>
+                        <p class="error-message" id="emailError"></p>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Ваше Предложение / Жалоба:</label>
+                        <textarea id="message" name="message" required></textarea>
+                        <p class="error-message" id="messageError"></p>
+                    </div>
+                    <button type="submit" class="btn">Отправить Д-ру Роботнику</button>
+                    <div id="formSuccessMessage" class="success-message" style="display: none;">
+                        ВАШЕ СООБЩЕНИЕ ПРИНЯТО К РАССМОТРЕНИЮ! ОЖИДАЙТЕ ОТВЕТА... ИЛИ НЕТ! ХО-ХО-ХО!
+                    </div>
+                </form>
+            </section>
+
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p>© <span id="currentYear"></span> Д-р Айво "Эггман" Роботник. Все планы защищены (мной).</p>
+            <p>Строительство Эггманландии не за горами! <a href="#">Присоединяйтесь!</a> (Шутка... или нет?)</p>
+        </div>
+    </footer>
+
+    <script>
+        // JavaScript остается тем же, что и в предыдущем примере.
+        // Для краткости я его здесь опущу, но он должен быть тут.
+        // Скопируйте JavaScript из предыдущего ответа.
+        document.addEventListener('DOMContentLoaded', function() {
+            // --- Плавная прокрутка для якорных ссылок ---
+            const contactMeBtn = document.getElementById('contactMeBtn');
+            if (contactMeBtn) {
+                contactMeBtn.addEventListener('click', function(e) {
+                    // Стандартное поведение html { scroll-behavior: smooth; } уже должно работать
+                });
+            }
+
+            // --- Анимация появления секций при скролле ---
+            const sections = document.querySelectorAll('.resume-section');
+            const animateOnScroll = () => {
+                sections.forEach(section => {
+                    const sectionTop = section.getBoundingClientRect().top;
+                    const windowHeight = window.innerHeight;
+                    if (sectionTop < windowHeight - windowHeight / 3) {
+                        section.classList.add('visible');
+                    }
+                });
+            };
+            window.addEventListener('scroll', animateOnScroll);
+            animateOnScroll();
+
+            // --- Валидация контактной формы ---
+            const contactForm = document.getElementById('contact-form');
+            const nameInput = document.getElementById('name');
+            const emailInput = document.getElementById('email');
+            const messageInput = document.getElementById('message');
+            const nameError = document.getElementById('nameError');
+            const emailError = document.getElementById('emailError');
+            const messageError = document.getElementById('messageError');
+            const formSuccessMessage = document.getElementById('formSuccessMessage');
+
+            if (contactForm) {
+                contactForm.addEventListener('submit', function(e) {
+                    e.preventDefault(); 
+                    let isValid = true;
+
+                    nameError.textContent = '';
+                    emailError.textContent = '';
+                    messageError.textContent = '';
+                    nameInput.style.borderColor = 'var(--border-color)';
+                    emailInput.style.borderColor = 'var(--border-color)';
+                    messageInput.style.borderColor = 'var(--border-color)';
+                    formSuccessMessage.style.display = 'none';
+
+                    if (nameInput.value.trim() === '') {
+                        nameError.textContent = 'Без имени никак, даже если ты синий ёж!';
+                        nameInput.style.borderColor = 'red';
+                        isValid = false;
+                    }
+
+                    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                    if (emailInput.value.trim() === '') {
+                        emailError.textContent = 'Нужен Email, чтобы я знал, куда слать мои чертежи!';
+                        emailInput.style.borderColor = 'red';
+                        isValid = false;
+                    } else if (!emailPattern.test(emailInput.value.trim())) {
+                        emailError.textContent = 'Этот Email выглядит подозрительно... как твои планы!';
+                        emailInput.style.borderColor = 'red';
+                        isValid = false;
+                    }
+
+                    if (messageInput.value.trim() === '') {
+                        messageError.textContent = 'Не молчи! Выскажи всё, что думаешь (или предложи)!';
+                        messageInput.style.borderColor = 'red';
+                        isValid = false;
+                    } else if (messageInput.value.trim().length < 10) {
+                        messageError.textContent = 'Слишком коротко! Мои роботы пишут более длинные отчеты!';
+                        messageInput.style.borderColor = 'red';
+                        isValid = false;
+                    }
+
+                    if (isValid) {
+                        console.log('Форма валидна. Данные для Доктора:');
+                        console.log('Имя:', nameInput.value.trim());
+                        console.log('Email:', emailInput.value.trim());
+                        console.log('Сообщение:', messageInput.value.trim());
+                        
+                        formSuccessMessage.style.display = 'block';
+                        contactForm.reset(); 
+                    }
+                });
+            }
+
+            // --- Установка текущего года в подвале ---
+            const currentYearSpan = document.getElementById('currentYear');
+            if (currentYearSpan) {
+                currentYearSpan.textContent = new Date().getFullYear();
+            }
+
+            // --- Кнопка "Скачать Ген. План" ---
+            const downloadBtn = document.getElementById('downloadResumeBtn');
+            if (downloadBtn) {
+                downloadBtn.addEventListener('click', function(e) {
+                    if (this.getAttribute('href') === 'Eggman_Master_Plan.pdf') { 
+                        // alert('ВНИМАНИЕ! Скачивание этого документа может привести к непредсказуемым последствиям! ХО-ХО-ХО!');
+                    }
+                    console.log('Попытка скачать генеральный план Эггмана...');
+                });
+            }
+        });
+    </script>
+</body>
+</html>

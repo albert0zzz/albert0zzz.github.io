@@ -1,0 +1,243 @@
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Более современный шрифт */
+    line-height: 1.6; /* Улучшает читаемость */
+    margin: 0;
+    padding: 20px;
+    background-color: #f4f4f4;
+    color: #333; /* Основной цвет текста */
+    transition: background-color 0.5s ease; /* Плавный переход для смены фона */
+}
+
+h1, h2 {
+    color: #0056b3; /* Синий цвет для заголовков */
+}
+
+/* Стили из предыдущих заданий (можно оставить или удалить, если не используются) */
+.learned-ok {
+    color: green;
+}
+.learning-in-progress {
+    color: orange;
+}
+.not-learned {
+    color: red;
+}
+
+/* Стили для контейнера резюме */
+.resume-container {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 25px;
+    background-color: #ffffff;
+    border: 1px solid #ddd; /* Рамка */
+    border-radius: 8px; /* Скругленные углы рамки */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15); /* Тень */
+}
+
+.resume-container h1 {
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 2.5em; /* Размер шрифта для главного заголовка */
+    color: #333; /* Цвет текста для главного заголовка */
+}
+
+.resume-section {
+    margin-bottom: 30px;
+    padding: 20px;
+    border: 1px dashed #007bff; /* Рамка для секций */
+    border-radius: 5px;
+}
+
+.resume-section h2 {
+    font-size: 1.8em; /* Размер шрифта для заголовков секций */
+    border-bottom: 2px solid #eee;
+    padding-bottom: 10px;
+    margin-bottom: 15px;
+}
+
+#personal-info img#resumePhoto {
+    display: block;
+    max-width: 150px;
+    height: auto;
+    border-radius: 50%; /* Круглое фото */
+    margin: 0 auto 20px auto;
+    border: 3px solid #007bff; /* Рамка для фото */
+    box-shadow: 0 2px 6px rgba(0,0,0,0.2); /* Тень для фото */
+}
+
+#personal-info p {
+    font-size: 1.1em; /* Размер шрифта для текста в личной информации */
+    color: #555; /* Цвет текста */
+}
+
+#personal-info p strong {
+    color: #333;
+}
+
+/* Стили для группы ввода и кнопок */
+.input-group {
+    margin-bottom: 15px;
+}
+
+.input-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #444; /* Цвет текста для метки */
+}
+
+.input-group input[type="text"] {
+    width: calc(100% - 22px); /* Учитываем padding и border */
+    padding: 10px;
+    border: 1px solid #ccc; /* Рамка для поля ввода */
+    border-radius: 4px;
+    font-size: 1em; /* Размер шрифта в поле ввода */
+}
+
+button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 1em; /* Размер шрифта для кнопок */
+    margin: 5px 5px 5px 0;
+    cursor: pointer;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* Тень для кнопок */
+    transition: background-color 0.3s ease, transform 0.1s ease; /* Плавные переходы */
+}
+
+button:hover {
+    background-color: #0056b3; /* Изменение цвета при наведении */
+    transform: translateY(-1px); /* Небольшой сдвиг вверх при наведении */
+}
+
+button:active {
+    transform: translateY(0px); /* Возврат при нажатии */
+}
+
+#skills ul {
+    list-style-type: square;
+    padding-left: 20px;
+}
+
+#skills li {
+    font-size: 1.05em; /* Размер шрифта для элементов списка */
+    margin-bottom: 5px;
+    color: #484848; /* Цвет текста для элементов списка */
+}
+
+.function-panel h2 {
+    color: #28a745; /* Другой цвет для заголовков панелей функций */
+}
+
+.function-panel p strong { /* Стиль для выделения "Результат:" */
+    margin-right: 5px;
+}
+
+#equalResult {
+    font-weight: bold;
+}
+
+/* styles.css */
+/* ... (все ваши предыдущие стили) ... */
+
+.input-group.checkbox-group {
+    display: flex;
+    align-items: center; /* Выравниваем чекбокс и лейбл по центру */
+    margin-bottom: 15px;
+}
+
+.input-group.checkbox-group input[type="checkbox"] {
+    margin-right: 8px;
+    /* Увеличим размер чекбокса для наглядности */
+    width: 18px;
+    height: 18px;
+    cursor: pointer;
+}
+.input-group.checkbox-group label {
+    margin-bottom: 0; /* Убираем отступ снизу у label в группе с чекбоксом */
+    font-weight: normal; /* Обычный шрифт для лейбла чекбокса */
+}
+
+textarea#additionalInfo {
+    width: calc(100% - 22px); /* Учитываем padding и border */
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 1em;
+    font-family: inherit; /* Наследуем шрифт от body */
+    min-height: 60px; /* Минимальная высота */
+}
+
+#skills ul {
+    list-style-type: none; /* Убираем стандартные маркеры, т.к. будут чекбоксы */
+    padding-left: 0;
+}
+
+#skills li {
+    margin-bottom: 10px;
+    display: flex; /* Для выравнивания текста и чекбокса */
+    align-items: center;
+}
+
+#skills li input[type="checkbox"].skill-checkbox {
+    margin-left: 10px; /* Отступ слева для чекбокса навыка */
+    width: 16px;
+    height: 16px;
+}
+
+#submitAnketaButton {
+    background-color: #28a745; /* Зеленый для кнопки сохранения */
+    display: block; /* Чтобы кнопка занимала всю доступную ширину в своей секции */
+    width: 100%;
+    font-size: 1.1em;
+    padding: 12px;
+}
+#submitAnketaButton:hover {
+    background-color: #218838;
+}
+.navigation-links {
+    background-color: #e9ecef; /* Нейтральный фон для секции */
+    padding: 20px;
+    margin-top: 30px; /* Отступ сверху от предыдущего контента */
+    margin-bottom: 30px; /* Отступ снизу */
+    border-radius: 8px;
+    text-align: center; /* Центрируем заголовок и список */
+    max-width: 800px; /* Такая же ширина, как у resume-container для консистентности */
+    margin-left: auto; /* Центрирование блока, если max-width задан */
+    margin-right: auto;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.navigation-links h2 {
+    margin-bottom: 15px;
+    color: #343a40; /* Темный цвет заголовка */
+}
+
+.navigation-links ul {
+    list-style-type: none; /* Убираем маркеры списка */
+    padding: 0;
+}
+
+.navigation-links li {
+    margin-bottom: 10px;
+}
+
+.navigation-links a {
+    text-decoration: none;
+    color: #007bff; /* Синий цвет ссылок */
+    font-size: 1.1em;
+    padding: 5px 10px;
+    border-radius: 4px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.navigation-links a:hover {
+    background-color: #007bff;
+    color: #fff; /* Белый текст при наведении */
+    text-decoration: none;
+}

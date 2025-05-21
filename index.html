@@ -1,145 +1,102 @@
 <!DOCTYPE html>
-<html lang="en" >
+<html lang="ru">
 <head>
-  <meta charset="UTF-8">
-  <link rel="stylesheet" href="./style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Моя Лабораторная Работа</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
-
 <body>
-<link href='https://fonts.googleapis.com/css?family=Lato:400,300,700' rel='stylesheet' type='text/css'>
+    <!-- Элемент для вывода из ИЗ2 (можно оставить или убрать, если не нужен на странице) -->
+    <p id="outputAdmin"></p> <!-- Этот элемент скрывается через JS в последней версии inds.js -->
 
-<div class="container">
-  <div class="header">
-    <div class="full-name">
-      <span class="first-name">Albert</span> 
-      <span class="last-name">Nasretdinov</span>
+    <hr> <!-- Горизонтальная линия для разделения -->
+
+    <div class="resume-container"> <!-- Будем считать, что это основной контейнер для ИЗ 1-5 -->
+        <h1>Моя Лабораторная Работа (Анкета)</h1>
+
+        <section class="resume-section" id="personal-info">
+            <h2>Личная информация</h2>
+            <img src="silicat.jpg" alt="Моё фото" id="resumePhoto">
+            
+            <div class="input-group">
+                <label for="resumeNameInput">Имя:</label>
+                <input type="text" id="resumeNameInput" value="Альберт">
+            </div>
+            
+            <div class="input-group">
+                <label for="resumeSurnameInput">Фамилия:</label>
+                <input type="text" id="resumeSurnameInput" value="Насретдинов">
+            </div>
+
+            <p><strong>Возраст:</strong> <span id="resumeAge">Уточняется...</span></p>
+
+            <div class="input-group">
+                <label for="resumeGenderInput">Пол (М/Ж):</label>
+                <input type="text" id="resumeGenderInput" placeholder="М или Ж">
+            </div>
+
+            <div class="input-group checkbox-group">
+                <input type="checkbox" id="agreeTerms" name="agreeTerms">
+                <label for="agreeTerms">Согласен на обработку персональных данных</label>
+            </div>
+
+            <div class="input-group">
+                <label for="additionalInfo">Дополнительная информация:</label>
+                <textarea id="additionalInfo" rows="3" placeholder="Расскажите что-нибудь еще..."></textarea>
+            </div>
+        </section>
+
+        <section class="resume-section" id="controls">
+            <h2>Управление</h2>
+            <div class="input-group">
+                <button id="randomBgButton">Случайный Цвет Фона</button>
+            </div>
+        </section>
+
+        <section class="resume-section function-panel" id="equal-panel">
+            <h2>Проверка функции equal(a, b)</h2>
+            <div class="input-group">
+                <label for="equalA">Значение A:</label>
+                <input type="text" id="equalA" placeholder="Введите A">
+            </div>
+            <div class="input-group">
+                <label for="equalB">Значение B:</label>
+                <input type="text" id="equalB" placeholder="Введите B">
+            </div>
+            <button id="checkEqualButton">Проверить Равенство</button>
+            <p><strong>Результат:</strong> <span id="equalResult"></span></p>
+        </section>
+
+        <section class="resume-section" id="skills">
+            <h2>Навыки (Анкета)</h2> <!-- Уточнил заголовок -->
+            <ul>
+                <li>HTML <input type="checkbox" class="skill-checkbox" data-skill="html"></li>
+                <li>CSS <input type="checkbox" class="skill-checkbox" data-skill="css"></li>
+                <li>JavaScript <input type="checkbox" class="skill-checkbox" data-skill="js"></li>
+                <li>Python <input type="checkbox" class="skill-checkbox" data-skill="python"></li>
+            </ul>
+        </section>
+
+        <section class="resume-section" id="submission-area">
+            <button id="submitAnketaButton">Проверить и Сохранить Анкету</button>
+            <div id="hireMeElement" style="display: none; margin-top: 15px; padding: 10px; background-color: #d4edda; border: 1px solid #c3e6cb; color: #155724; border-radius: 4px;">
+                Поздравляем! Ваши данные выглядят отлично. Возможно, мы вас возьмем! :)
+            </div>
+        </section>
+
     </div>
-    <div class="contact-info">
-      <span class="email">Email: </span>
-      <span class="email-val"> albert0zzz.contact@gmail.com</span>
-      <span class="separator"></span>
-      <span class="phone">Phone: </span>
-      <span class="phone-val">111-222-3333</span>
+
+    <!-- Новая секция для навигации по другим страницам -->
+    <div class="navigation-links container"> <!-- Используем класс container для центрирования и отступов -->
+        <h2>Другие работы:</h2>
+        <ul>
+            <li><a href="resume.html" target="_blank">Резюме Доктора Эггмана</a></li>
+            <li><a href="ind-one.html" target="_blank">Стрелочный Индикатор (Задание повышенной сложности)</a></li>
+        </ul>
     </div>
-    
-    <div class="about">
-      <span class="position">Software Developer </span>
-      <span class="desc">
-        I am currently a student at Moscow State Technological University Stankin and I am receiving a bachelor's degree in Automation of Technological Processes and Productions. I have worked with video editing, 2D and 3D graphics. At the moment I'm learning more about programming.
-      </span>
-    </div>
-  </div>
-   <div class="details">
-    <div class="section">
-      <div class="section__title">Education</div>
-      <div class="section__list">
-        <div class="section__list-item">
-          <div class="left">
-            <div class="name">MSTU Stankin</div>
-            <div class="addr">Moscow, Russia</div>
-            <div class="duration">2022 - now</div>
-          </div>
-          <div class="right">
-            <div class="name">Automation Specialist</div>
-            <div class="desc">Yep, I'm automate</div>
-          </div>
-      </div>
-  </div>
-    </div>
-     <div class="section">
-       <div class="section__title">Skills</div>
-       <div class="skills">
-         <div class="skills__item">
-           <div class="left"><div class="name">
-             Javascript
-             </div></div>
-           <div class="right">
-                          <input  id="ck1" type="checkbox" checked/>
+    <!-- Конец новой секции -->
 
-             <label for="ck1"></label>
-                          <input id="ck2" type="checkbox" checked/>
-
-              <label for="ck2"></label>
-                         <input id="ck3" type="checkbox" checked/>
-
-              <label for="ck3"></label>
-                           <input id="ck4" type="checkbox" />
-            <label for="ck4"></label>
-                          <input id="ck5" type="checkbox" />
-              <label for="ck5"></label>
-
-           </div>
-         </div>
-         
-       </div>
-       <div class="skills__item">
-           <div class="left"><div class="name">
-             CSS</div></div>
-           <div class="right">
-                          <input  id="ck1" type="checkbox" checked/>
-
-             <label for="ck1"></label>
-                          <input id="ck2" type="checkbox" checked/>
-
-              <label for="ck2"></label>
-                         <input id="ck3" type="checkbox" />
-
-              <label for="ck3"></label>
-                           <input id="ck4" type="checkbox" />
-            <label for="ck4"></label>
-                          <input id="ck5" type="checkbox" />
-              <label for="ck5"></label>
-
-           </div>
-         </div>
-         
-       </div>
-     <div class="section">
-     <div class="section__title">
-       Interests
-       </div>
-       <div class="section__list">
-         <div class="section__list-item">
-                  Game development, programming.
-          </div>
-       </div>
-     </div>
-
-     <div class="section">
-      <div class="section__title">
-        JavaScript Confirm Box
-        </div>
-        <div class="section__list">
-            <button class="btn" onclick="myFunction()">Try it</button>
-            <ul id="demo"></ul>
-        </div>
-        <script>
-            function sleep(ms) {
-                return new Promise(resolve => setTimeout(resolve, ms));
-            }
-            function myFunction() {
-                (async () => {
-                    let response = await fetch('https://kav-api.kovalev.team/servodrive/lastActualData?servoDriveId=1');
-                    let el = document.getElementById('demo')
-                    el.innerHTML = ""
-                    let text = await response.text(); // прочитать тело ответа как текст
-                    for (const [key, value] of Object.entries(JSON.parse(text)[0])) {
-                        const newEl = document.createElement("li")
-                        newEl.appendChild(document.createTextNode(`${key}: ${value}`))
-                        el.appendChild(newEl)
-                        await sleep(100)
-                    }
-                })()
-            }
-        </script>
-
-        </div>
-      </div>
-
-     </div>
-    </div>
-  </div>
-</div>
-
+    <script src="inds.js"></script>
 </body>
 </html>

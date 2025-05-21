@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Стрелочный Индикатор</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+            transition: background-color 0.5s ease; /* Плавный переход цвета фона */
+        }
+
+        .indicator-container {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        h1 {
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        /* Стилизация HTML Range Input */
+        input[type="range"] {
+            -webkit-appearance: none; /* Сброс стандартного вида для WebKit/Blink */
+            appearance: none;
+            width: 300px; /* Ширина трека */
+            height: 20px; /* Высота трека */
+            background: #ddd; /* Цвет трека */
+            outline: none; /* Убрать стандартную обводку */
+            border-radius: 10px; /* Скругление трека */
+            margin: 20px 0;
+            cursor: default; /* Убираем курсор изменения, так как управление с кнопок */
+        }
+
+        /* Стилизация ползунка (thumb) для WebKit/Blink браузеров */
+        input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 30px;  /* Ширина ползунка */
+            height: 30px; /* Высота ползунка */
+            background: #007bff; /* Цвет ползунка */
+            border-radius: 50%; /* Круглый ползунок */
+            cursor: default;
+            border: 2px solid white; /* Белая обводка для контраста */
+            box-shadow: 0 0 5px rgba(0,0,0,0.3);
+            transition: background-color 0.3s ease; /* Плавный переход цвета ползунка */
+        }
+
+        /* Стилизация ползунка (thumb) для Firefox */
+        input[type="range"]::-moz-range-thumb {
+            width: 26px;  /* Ширина ползунка */
+            height: 26px; /* Высота ползунка */
+            background: #007bff; /* Цвет ползунка */
+            border-radius: 50%; /* Круглый ползунок */
+            cursor: default;
+            border: 2px solid white;
+            box-shadow: 0 0 5px rgba(0,0,0,0.3);
+            transition: background-color 0.3s ease;
+        }
+        
+        /* Класс для красного фона страницы */
+        .red-background {
+            background-color: #ffdddd; /* Светло-красный фон */
+        }
+        
+        /* Класс для красного ползунка */
+        .red-thumb::-webkit-slider-thumb {
+            background: #dc3545 !important; /* Красный цвет ползунка */
+        }
+        .red-thumb::-moz-range-thumb {
+            background: #dc3545 !important; /* Красный цвет ползунка для Firefox */
+        }
+
+
+        .keyboard {
+            margin-top: 20px;
+            display: grid;
+            grid-template-columns: repeat(5, 1fr); /* 5 кнопок в ряд */
+            gap: 10px;
+            max-width: 300px; /* Ограничиваем ширину клавиатуры */
+            margin-left: auto;   /* Добавлено для центрирования */
+            margin-right: auto;  /* Добавлено для центрирования */
+        }
+        
+        .keyboard button {
+            padding: 15px;
+            font-size: 1.2em;
+            background-color: #007bff; /* Базовый синий */
+            color: white;
+            border: 2px solid #007bff; /* Добавим рамку того же цвета */
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease, transform 0.1s ease; /* Добавим transform */
+        }
+
+        .keyboard button:hover {
+            background-color: #0056b3;
+            border-color: #0056b3;
+        }
+        .keyboard button:active { /* Эффект нажатия */
+            background-color: #004085;
+            border-color: #004085;
+            transform: scale(0.95); /* Немного уменьшаем кнопку при нажатии */
+        }
+
+        /* Класс для кнопки, соответствующей текущему значению (если нужно выделить только ее) */
+        .keyboard button.selected {
+            background-color: #28a745; /* Зеленый для выделенной */
+            border-color: #28a745;
+            color: white;
+        }
+        
+        /* Класс для кнопок, когда значение > 5 */
+        .keyboard button.red-button-state {
+            background-color: #ffc107; /* Оранжевый для предупреждения */
+            border-color: #ffc107; 
+            color: #333; /* Темный текст на оранжевом */
+        }
+        .keyboard button.red-button-state.selected { /* Выбранная кнопка в красном состоянии */
+            background-color: #dc3545; /* Красный для выделенной в "опасном" состоянии */
+            border-color: #dc3545;
+            color: white;
+        }
+        
+        .current-value {
+            font-size: 1.5em;
+            margin-top: 15px;
+            color: #333;
+        }
+        .current-value span {
+            font-weight: bold;
+            color: #007bff;
+        }
+        .current-value span.red-text {
+            color: #dc3545;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="indicator-container">
+        <h1>Стрелочный Индикатор</h1>
+        
+        <input type="range" id="rangeIndicator" min="0" max="9" value="0" step="1" disabled>
+        
+        <div class="current-value">
+            Текущее значение: <span id="currentValueDisplay">0</span>
+        </div>
+
+        <div class="keyboard">
+            <button onclick="setIndicatorValue(0)">0</button>
+            <button onclick="setIndicatorValue(1)">1</button>
+            <button onclick="setIndicatorValue(2)">2</button>
+            <button onclick="setIndicatorValue(3)">3</button>
+            <button onclick="setIndicatorValue(4)">4</button>
+            <button onclick="setIndicatorValue(5)">5</button>
+            <button onclick="setIndicatorValue(6)">6</button>
+            <button onclick="setIndicatorValue(7)">7</button>
+            <button onclick="setIndicatorValue(8)">8</button>
+            <button onclick="setIndicatorValue(9)">9</button>
+            <!-- Можно добавить кнопку для 10, если нужно, но в задании от 0 до 9 -->
+        </div>
+    </div>
+
+    <script>
+        const rangeIndicator = document.getElementById('rangeIndicator');
+        const currentValueDisplay = document.getElementById('currentValueDisplay');
+        const keyboardButtons = document.querySelectorAll('.keyboard button');
+        
+        function setIndicatorValue(value) {
+            // 1. Устанавливаем значение для input range
+            rangeIndicator.value = value;
+
+            // 2. Обновляем отображаемое числовое значение
+            currentValueDisplay.textContent = value;
+            
+            keyboardButtons.forEach(button => {
+                button.classList.remove('selected');
+                button.classList.remove('red-button-state');
+            });
+
+            keyboardButtons.forEach(button => {
+                if (parseInt(button.textContent) === value) {
+                    button.classList.add('selected');
+                }
+            });
+            // 3. Проверяем условие для изменения цвета
+            if (value > 5) {
+                document.body.classList.add('red-background');
+                rangeIndicator.classList.add('red-thumb');
+                currentValueDisplay.classList.add('red-text');
+
+                // Добавляем класс 'red-button-state' ко всем кнопкам или только к выбранной
+                // Вариант 1: Все кнопки меняют состояние
+                keyboardButtons.forEach(button => {
+                    button.classList.add('red-button-state');
+                });
+                // Вариант 2: Только выбранная кнопка становится ярко-красной, остальные оранжевыми
+                // (для этого варианта стили .keyboard button.red-button-state.selected уже есть)
+                // Уже обработано добавлением класса 'selected' и 'red-button-state' и CSS правилами
+
+            } else {
+                document.body.classList.remove('red-background');
+                rangeIndicator.classList.remove('red-thumb');
+                currentValueDisplay.classList.remove('red-text');
+                // Класс 'red-button-state' уже убран со всех кнопок в начале функции
+            }
+        }
+
+        // Установим начальное значение 0 при загрузке (хотя оно уже value="0" в HTML)
+        // setIndicatorValue(0); // Можно раскомментировать, если нужно явное начальное применение стилей для 0.
+    </script>
+</body>
+</html>
